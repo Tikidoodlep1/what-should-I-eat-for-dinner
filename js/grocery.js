@@ -11,28 +11,26 @@ function updateCount() { 		   // Define updateCount function
   counter.innerHTML = listItems;                         // Update counter
 }
 
-selectedIngredients = [];
+var selectedIngredients = [];
 
-import { getIngredients } from "./ingredients.js"
+//import { getIngredients } from "./ingredients.js"
 
 function addNewIngredient(x) {
-
 	// search through the array for the product
 	//getIngredients();
-	Debug.log("addingNewIngredient");
-	var searchValue = document.getElementById('search').textContent;
+	console.log("addingNewIngredient");
 	var valid = false;
 	var arr = getIngredients();
-	console.log(searchValue);
+	console.log(x);
 	for(var i = 0; i < arr.length; i++) {
-  		if(arr[i].includes(searchValue)) {
+  		if(arr[i].includes(x)) {
     	valid = true;
     	break;
   		}
 	}
 	
 	if (valid == false){
-	alert(UserInput + "was not found in the ingredients list")
+	alert(x + "was not found in the ingredients list")
   	}
 	else { // if found in the array continue as normal
 	selectedIngredients.push();

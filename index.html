@@ -48,7 +48,7 @@
 			</ul>
 			<div class="button"><a href="#" id="add" class="add"></a></div> <!-- Add button without text -->
 		  </div>
-          <script src="js/ingredients.js" type="module"></script>
+          <script src="js/ingredients.js"></script>
 		  <script src="js/grocery.js"></script>
 	</main>
 
@@ -58,11 +58,11 @@
 	<input type="text" id="search" placeholder="Type here!" autocomplete="off">
     <div id="suggestions"></div>
 	
-
-    <div> 
+    <div>
         <p>
-            <button onclick="addNewIngredient('')" id="addButton">
+            <button onclick="addNewIngredient(document.getElementById('search').value)" id="addButton">
                 Add Ingredient
+            </button>
             <button onclick="generateRecipes('Recipes: ', 'No ingredients were selected. Showing all recipes: ');" id="generateButton">
                 Generate Recipes
             </button>
@@ -93,6 +93,7 @@
     
     <script>
         function generateRecipes(title, description) {
+            console.log("Generate Recipes called");
             const ingredientsParam = selectedIngredients.map(ingredient => `ingredient[]=${encodeURIComponent(ingredient)}`).join('&');
             const titleParam = `title=${encodeURIComponent(title)}`;
             const descriptionParam = `description=${encodeURIComponent(description)}`;
