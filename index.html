@@ -48,6 +48,7 @@
 			</ul>
 			<div class="button"><a href="#" id="add" class="add"></a></div> <!-- Add button without text -->
 		  </div>
+          <script src="js/ingredients.js" type="module"></script>
 		  <script src="js/grocery.js"></script>
 	</main>
 
@@ -60,6 +61,8 @@
 
     <div> 
         <p>
+            <button onclick="addNewIngredient('')" id="addButton">
+                Add Ingredient
             <button onclick="generateRecipes('Recipes: ', 'No ingredients were selected. Showing all recipes: ');" id="generateButton">
                 Generate Recipes
             </button>
@@ -94,10 +97,11 @@
             const titleParam = `title=${encodeURIComponent(title)}`;
             const descriptionParam = `description=${encodeURIComponent(description)}`;
             window.location.href = `./showRecipes.php?${ingredientsParam}&${titleParam}&${descriptionParam}`;
+            //fetch("showRecipes.php", {method: "POST", body: "<ingredientsParam>"});
         }
     </script>
     
-
+    <!-- 
     <script>
 
             window.selectedIngredients = [];
@@ -160,6 +164,7 @@
             }
         });
     </script>
+    -->
 
 </body>
 </body>

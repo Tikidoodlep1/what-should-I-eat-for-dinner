@@ -11,7 +11,31 @@ function updateCount() { 		   // Define updateCount function
   counter.innerHTML = listItems;                         // Update counter
 }
 
+selectedIngredients = [];
+
+import { getIngredients } from "./ingredients.js"
+
 function addNewIngredient(x) {
+
+	// search through the array for the product
+	//getIngredients();
+	Debug.log("addingNewIngredient");
+	var searchValue = document.getElementById('search').textContent;
+	var valid = false;
+	var arr = getIngredients();
+	console.log(searchValue);
+	for(var i = 0; i < arr.length; i++) {
+  		if(arr[i].includes(searchValue)) {
+    	valid = true;
+    	break;
+  		}
+	}
+	
+	if (valid == false){
+	alert(UserInput + "was not found in the ingredients list")
+  	}
+	else { // if found in the array continue as normal
+	selectedIngredients.push();
 	
     var newEl = document.createElement('li');
     var deleteButton = document.createElement('a');
@@ -23,6 +47,7 @@ function addNewIngredient(x) {
     newEl.appendChild(deleteButton);
     elList.appendChild(newEl);
     updateCount();
+	}
 }
 
 // create a function that remove <li> element which's delete button is clicked
