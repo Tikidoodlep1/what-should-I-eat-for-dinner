@@ -16,36 +16,42 @@ var selectedIngredients = [];
 //import { getIngredients } from "./ingredients.js"
 
 function addNewIngredient(x) {
-	// search through the array for the product
-	//getIngredients();
-	console.log("addingNewIngredient");
-	var valid = false;
-	var arr = getIngredients();
-	console.log(x);
-	for(var i = 0; i < arr.length; i++) {
-  		if(arr[i].includes(x)) {
-    	valid = true;
-    	break;
-  		}
-	}
+    if (selectedIngredients.includes(x)){
+        alert(x + " is already in your ingredients list!");
+    }
+    if (x === "") {
+        alert("Type something to add into the ingredients list.");
+    }
+    else {
+	    var valid = false;
+	    var arr = getIngredients();
+	    console.log(x);
+	    for(var i = 0; i < arr.length; i++) {
+  		    if(arr[i].includes(x)) {
+    	    valid = true;
+    	    break;
+  		    }
+	    }
 	
-	if (valid == false){
-	alert(x + "was not found in the ingredients list")
-  	}
-	else { // if found in the array continue as normal
-	selectedIngredients.push();
+	    if (valid == false){
+	    alert(x + "was not found in the ingredients list")
+  	    }
+	    else { // if found in the array continue as normal
+	        selectedIngredients.push(x);
+            console.log("Ingredients list is now: " + selectedIngredients);
 	
-    var newEl = document.createElement('li');
-    var deleteButton = document.createElement('a');
-    deleteButton.setAttribute('href', '#');
-    deleteButton.setAttribute('class', 'delete');
-    deleteButton.textContent = "Delete";
+            var newEl = document.createElement('li');
+            var deleteButton = document.createElement('a');
+            deleteButton.setAttribute('href', '#');
+            deleteButton.setAttribute('class', 'delete');
+            deleteButton.textContent = "Delete";
    
-    newEl.textContent = x;  
-    newEl.appendChild(deleteButton);
-    elList.appendChild(newEl);
-    updateCount();
-	}
+            newEl.textContent = x;  
+            newEl.appendChild(deleteButton);
+            elList.appendChild(newEl);
+            updateCount();
+	        }
+        }
 }
 
 // create a function that remove <li> element which's delete button is clicked
@@ -66,9 +72,11 @@ function removeItem(e) {
 			console.log("Updated Ingredients After Delete: " + selectedIngredients);
 
 			// update the URL for the PHP file
+            /*
             const ingredientsParam = selectedIngredients.map(ingredient => `ingredient[]=${encodeURIComponent(ingredient)}`).join('&');
             const generateButton = document.getElementById('generateButton');
             generateButton.setAttribute('onclick', `window.location.href='./showRecipes.php?${ingredientsParam}'`);
+            */
 
             alert(displayText + " was deleted!");
         } else {

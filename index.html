@@ -63,7 +63,7 @@
             <button onclick="addNewIngredient(document.getElementById('search').value)" id="addButton">
                 Add Ingredient
             </button>
-            <button onclick="generateRecipes('Recipes: ', 'No ingredients were selected. Showing all recipes: ');" id="generateButton">
+            <button onclick="generateRecipes('Recipes', 'No ingredients were selected. Showing all recipes: ');" id="generateButton">
                 Generate Recipes
             </button>
         </p>
@@ -91,6 +91,7 @@
         </div>
     </div>
     
+    <!--
     <script>
         function generateRecipes(title, description) {
             console.log("Generate Recipes called");
@@ -100,6 +101,33 @@
             window.location.href = `./showRecipes.php?${ingredientsParam}&${titleParam}&${descriptionParam}`;
             //fetch("showRecipes.php", {method: "POST", body: "<ingredientsParam>"});
         }
+    </script>
+    -->
+
+    <div id="output"></div>
+
+    <form id="recipeForm" action="showRecipes.php" method="POST" style="display:none;">
+        <input type="hidden" name="title" id="titleInput">
+        <input type="hidden" name="description" id="descriptionInput">
+        <input type="hidden" name="ingredients" id="ingredientsInput">
+    </form>
+    
+    <script>
+    function generateRecipes(title, description) {
+    console.log("Generate Recipes called");
+
+    const ingredients = selectedIngredients; // Ensure this is an array of selected ingredients
+
+    // Set the values in the hidden form inputs
+    document.getElementById('titleInput').value = title;
+    document.getElementById('descriptionInput').value = description;
+
+    // Prepare ingredients as a comma-separated string
+    document.getElementById('ingredientsInput').value = ingredients.join(',');
+
+    // Submit the form
+    document.getElementById('recipeForm').submit();
+}
     </script>
     
     <!-- 
