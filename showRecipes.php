@@ -1,5 +1,6 @@
 
 <?php
+include_once("./databaseUtils.php");
 /*
 // Get title and description from the URL
 $title = isset($_GET['title']) ? $_GET['title'] : 'Recipes:';
@@ -24,7 +25,13 @@ $ingredientsString = $_POST['ingredients'] ?? '';
 // converting the ingredients string back into an array
 $ingredients = !empty($ingredientsString) ? explode(',', $ingredientsString) : [];
 
+//DB STUFF ONLY BELOW THIS LINE
+$db = new DbUtils();
+$db->SetErrorReporting(true);
+$searchResults = $db->QueryRecipesIncludingIngredients($ingredients);
+var_dump($searchResults);
 ?>
+
 <!DOCTYPE html>
 <html lang="en-US">
 <head>
