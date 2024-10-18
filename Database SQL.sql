@@ -16,3 +16,5 @@ FIELDS TERMINATED BY ','
 ENCLOSED BY '"'
 LINES TERMINATED BY '\n' 
 ;
+
+ALTER TABLE `recipe` ADD INDEX `idx_title_img_name` (`recipe_title`, `img_name`);

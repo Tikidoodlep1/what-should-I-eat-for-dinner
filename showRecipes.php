@@ -28,6 +28,7 @@ $ingredients = !empty($ingredientsString) ? explode(',', $ingredientsString) : [
 //DB STUFF ONLY BELOW THIS LINE
 $db = new DbUtils();
 $db->SetErrorReporting(true);
+//We should add two GenerateRecipes buttons - one to call QueryRecipesIncludingIngredients and one to call QueryRecipesWithIngredients.
 $searchResults = $db->QueryRecipesIncludingIngredients($ingredients);
 var_dump($searchResults);
 ?>
