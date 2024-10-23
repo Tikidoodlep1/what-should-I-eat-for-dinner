@@ -1,5 +1,4 @@
 <?php
-
 include_once("./DbCredentials.php");
 
 class DbUtils {
@@ -211,7 +210,5 @@ class DbUtils {
 		return $queryResult;
 	}
 }
-
-
 
 ?>

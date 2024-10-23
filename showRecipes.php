@@ -1,43 +1,48 @@
-
 <?php
-include_once("./databaseUtils.php");
-/*
-// Get title and description from the URL
-$title = isset($_GET['title']) ? $_GET['title'] : 'Recipes:';
-$description = isset($_GET['description']) ? $_GET['description'] : 'Based on the ingredients selected, here are the following recipes: ';
+session_start();
 
-echo "<title> $title </title>";
-
-echo "<h1>$title</h1>";
-if (isset($_GET['ingredient'])) { // change to post
-    // Collect all ingredients from the URL
-    $ingredients = $_GET['ingredient'];
-    echo "You searched for: " . implode(", ", $ingredients);
+if(isset($_SESSION["search_results"])) {
+    $title = $_SESSION["title"];
+    $description = $_SESSION["description"];
+    $ingredients = $_SESSION["selected_ingredients"];
+    $searchResults = $_SESSION["search_results"];
+}else {
+    header("Location: /programs/WhatShouldIEatForDinnerApp/index.php");
+    session_abort();
+    exit();
 }
-echo "<p>$description</p>";
-*/
 
-// Retrieve data from POST request
-$title = $_POST['title'] ?? 'Recipes';
-$description = $_POST['description'] ?? 'Here are your selected ingredients:';
-$ingredientsString = $_POST['ingredients'] ?? '';
-
-// converting the ingredients string back into an array
-$ingredients = !empty($ingredientsString) ? explode(',', $ingredientsString) : [];
-
-//DB STUFF ONLY BELOW THIS LINE
-$db = new DbUtils();
-$db->SetErrorReporting(true);
-//We should add two GenerateRecipes buttons - one to call QueryRecipesIncludingIngredients and one to call QueryRecipesWithIngredients.
-$searchResults = $db->QueryRecipesIncludingIngredients($ingredients);
-//var_dump($searchResults);
 ?>
 
 <!DOCTYPE html>
+
 <html lang="en-US">
 <head>
     <meta charset="UTF-8">
-    <title><?php echo htmlspecialchars($title); ?></title>
+    <title>What Should I Eat For Dinner</title>
+    <!-- <link rel="stylesheet" href="css/main.css" /> -->
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        #suggestions {
+            border: 1px solid #ccc;
+            max-height: 150px;
+            overflow-y: auto;
+            display: none;
+            position: absolute;
+            background: white;
+            z-index: 1000;
+        }
+        .suggestion {
+            padding: 10px;
+            cursor: pointer;
+        }
+        .suggestion:hover {
+            background-color: #f0f0f0;
+        }
+    </style>
 </head>
 <body>
     <header>
@@ -60,6 +65,7 @@ $searchResults = $db->QueryRecipesIncludingIngredients($ingredients);
         <section id="recipes-table">
             <table>
                 <thead>
+                    <th>Recipe Image</th>
                     <th>Recipe</th>
                     <th>Ingredients</th>
                     <th>Instructions</th>
@@ -86,6 +92,3 @@ $searchResults = $db->QueryRecipesIncludingIngredients($ingredients);
     </main>
 </body>
 </html>
-
-
-
